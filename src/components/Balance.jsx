@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useSyncExternalStore } from 'react'
+import { store } from '../configureStore/store'
 
-const Balance = ({balance}) => {
+const Balance = () => {
+    const {balance} = useSyncExternalStore(store.subscribe, store.getState);
     return (
         <div>
             <h1>Iron Bank of Braavos</h1>
