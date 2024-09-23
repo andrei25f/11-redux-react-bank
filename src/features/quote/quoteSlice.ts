@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchQuote } from "../api/quoteApi";
 
 const quoteSlice = createSlice({
     name: 'quote',
     initialState: 'Winter is coming...',
-    reducers: {
-        putQuote: (_state, action) => action.payload
-    }
+    reducers: {},
+    extraReducers: builder => {
+        builder
+            .addCase(fetchQuote.pending, () => 'Pending...')
+            .addCase(fetchQuote.fulfilled, (_state, action) => action.payload)
+            .addCase(fetchQuote.rejected, () => 'Error geting quote')
+    },
 })
-
-export const { putQuote } = quoteSlice.actions
 
 export default quoteSlice.reducer
